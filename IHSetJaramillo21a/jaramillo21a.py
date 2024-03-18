@@ -1,4 +1,4 @@
-import numpalpha as np
+import numpy as np
 from numba import jit
 
 @jit
