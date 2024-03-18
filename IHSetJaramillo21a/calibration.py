@@ -128,6 +128,7 @@ class cal_Jaramillo21a(object):
 
         mkIdx = np.vectorize(lambda t: np.argmin(np.abs(self.time_splited - t)))
         self.idx_obs_splited = mkIdx(self.time_obs_splited)
+        self.observations = self.alpha_obs_splited
 
 
         
