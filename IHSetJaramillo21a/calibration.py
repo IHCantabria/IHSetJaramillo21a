@@ -5,7 +5,7 @@ from spotpy.parameter import Uniform
 from .jaramillo21a import jaramillo21a
 from IHSetCalibration import objective_functions
 
-class cal_jaramillo21a(object):
+class cal_Jaramillo21a(object):
     """
     cal_jaramillo21a
     
