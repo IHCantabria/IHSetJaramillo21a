@@ -64,18 +64,19 @@ class cal_Jaramillo21a(object):
 
         if self.switch_alpha_ini == 0:
             def model_simulation(par):
-                a = -par['a']
+                a = par['a']
                 b = par['b']
-                cacr = -par['Lcw']
-                cero = -par['Lccw']
+                Lcw = par['Lcw']
+                Lccw = par['Lccw']
 
-                Ymd, _ = jaramillo21a(self.P_splited, self.Dir,
-                                    self.dt,
-                                    a,
-                                    b,
-                                    cacr,
-                                    cero,
-                                    self.alpha_ini
+                Ymd, _ = jaramillo21a(self.P_splited,
+                                      self.Dir,
+                                      self.dt,
+                                      a,
+                                      b,
+                                      Lcw,
+                                      Lccw,
+                                      self.alpha_ini
                                     )
                 return Ymd[self.idx_obs_splited]
             
@@ -89,19 +90,20 @@ class cal_Jaramillo21a(object):
 
         elif self.switch_alpha_ini == 1:
             def model_simulation(par):
-                a = -par['a']
+                a = par['a']
                 b = par['b']
-                cacr = -par['cacr']
-                cero = -par['cero']
+                Lcw = par['Lcw']
+                Lccw = par['Lccw']
                 alpha_ini = par['alpha_ini']
 
-                Ymd, _ = jaramillo21a(self.P_splited, self.Dir,
-                                    self.dt,
-                                    a,
-                                    b,
-                                    cacr,
-                                    cero,
-                                    alpha_ini
+                Ymd, _ = jaramillo21a(self.P_splited, 
+                                      self.Dir,
+                                      self.dt,
+                                      a,
+                                      b,
+                                      Lcw,
+                                      Lccw,
+                                      alpha_ini
                                     )
             
                 return Ymd[self.idx_obs_splited]
