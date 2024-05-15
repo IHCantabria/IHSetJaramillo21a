@@ -121,7 +121,7 @@ class cal_Jaramillo21a(object):
         Split the data into calibration and validation datasets.
         """
         ii = np.where(self.time>=self.start_date)[0][0]
-        self.P = self.E[ii:]
+        self.P = self.P[ii:]
         self.time = self.time[ii:]
 
         idx = np.where((self.time < self.start_date) | (self.time > self.end_date))
