@@ -112,7 +112,7 @@ class cal_Jaramillo21a(object):
                 Uniform('b', -1e+3, 1e+3),
                 Uniform('Lcw', 1e-9, 1e-3),
                 Uniform('Lccw', 1e-9, 1e-3),
-                Uniform('alpha_ini', np.min(self.Obs), np.max(self.Obs))
+                Uniform('alpha_ini', 0.5*np.min(self.Obs), 1.5*np.max(self.Obs))
             ]
             self.model_sim = model_simulation
 
