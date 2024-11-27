@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='IHSetJaramillo21a',
-    version='1.1.3',
+    version='1.2.0',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -11,7 +11,10 @@ setup(
         'numba',
         'datetime',
         'spotpy',
-        'IHSetCalibration @ git+https://github.com/defreitasL/IHSetCalibration.git'
+        'scipy',
+        'pandas',
+        'IHSetCalibration @ git+https://github.com/defreitasL/IHSetCalibration.git',
+        'fast_optimization @ git+https://github.com/defreitasL/fast_optimization.git'
     ],
     author='Lucas de Freitas Pereira',
     author_email='lucas.defreitas@unican.es',
