@@ -160,7 +160,7 @@ class cal_Jaramillo21a_2(object):
                 b = par[1]
                 Lcw = np.exp(par[2])
                 Lccw = np.exp(par[3])
-                Yini = par[4]
+                Yini = np.exp(par[4])
                 Ymd, _ = jaramillo21a(self.P_splited,
                                     self.dir_splited,
                                     self.dt_splited,
@@ -179,7 +179,7 @@ class cal_Jaramillo21a_2(object):
                 b = par[1]
                 Lcw = np.exp(par[2])
                 Lccw = np.exp(par[3])
-                Yini = par[4]
+                Yini = np.exp(par[4])
                 Ymd, _ = jaramillo21a(self.P,
                                     self.dir,
                                     self.dt,
@@ -193,8 +193,8 @@ class cal_Jaramillo21a_2(object):
             self.run_model = run_model
 
             def init_par(population_size):
-                log_lower_bounds = np.array([np.log(self.lb[0]), self.lb[1], np.log(self.lb[2]), np.log(self.lb[3]), 0.75*np.min(self.Obs)])
-                log_upper_bounds = np.array([np.log(self.ub[0]), self.ub[1], np.log(self.ub[2]), np.log(self.ub[3]), 1.25*np.max(self.Obs)])
+                log_lower_bounds = np.array([np.log(self.lb[0]), self.lb[1], np.log(self.lb[2]), np.log(self.lb[3]), np.log(0.75*np.min(self.Obs))])
+                log_upper_bounds = np.array([np.log(self.ub[0]), self.ub[1], np.log(self.ub[2]), np.log(self.ub[3]), np.log(1.25*np.max(self.Obs))])
                 population = np.zeros((population_size, 5))
                 for i in range(5):
                     population[:,i] = np.random.uniform(log_lower_bounds[i], log_upper_bounds[i], population_size)
