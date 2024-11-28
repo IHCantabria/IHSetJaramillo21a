@@ -90,7 +90,7 @@ class cal_Jaramillo21a_2(object):
         self.split_data()
 
         if self.switch_Yini == 0:
-            self.Yini = self.Obs_splited[0]
+            self.Yini = self.observations[self.idx_obs_splited[0]]
 
 
         mkIdx = np.vectorize(lambda t: np.argmin(np.abs(self.time - t)))
@@ -248,7 +248,7 @@ class cal_Jaramillo21a_2(object):
         if self.cal_alg == 'NSGAII':
             self.solution, self.objectives, self.hist = fo.nsgaii_algorithm_ts(
                 self.model_sim, 
-                self.Obs_splited, 
+                self.observations, 
                 self.init_par, 
                 self.num_generations, 
                 self.population_size,
@@ -264,7 +264,7 @@ class cal_Jaramillo21a_2(object):
         elif self.cal_alg == 'SPEA2':
             self.solution, self.objectives, self.hist = fo.spea2_algorithm(
                 self.model_sim, 
-                self.Obs_splited, 
+                self.observations, 
                 self.init_par, 
                 self.num_generations, 
                 self.population_size, 
@@ -281,7 +281,7 @@ class cal_Jaramillo21a_2(object):
         elif self.cal_alg == 'SCE-UA':
             self.solution, self.objectives, self.hist = fo.sce_ua_algorithm(
                 self.model_sim, 
-                self.Obs_splited, 
+                self.observations, 
                 self.init_par, 
                 self.num_generations, 
                 self.population_size,
@@ -297,7 +297,7 @@ class cal_Jaramillo21a_2(object):
         elif self.cal_alg == 'Simulated Annealing':
             self.solution, self.objectives, self.hist = fo.simulated_annealing(
                 self.model_sim, 
-                self.Obs_splited, 
+                self.observations, 
                 self.init_par, 
                 self.max_iterations, 
                 self.initial_temperature, 
