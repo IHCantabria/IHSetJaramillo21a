@@ -95,23 +95,24 @@ class cal_Jaramillo21a_2(object):
 
         mkIdx = np.vectorize(lambda t: np.argmin(np.abs(self.time - t)))
 
-        
         self.idx_obs = mkIdx(self.time_obs)
 
         # Now we calculate the dt from the time variable
         mkDT = np.vectorize(lambda i: (self.time[i+1] - self.time[i]).total_seconds()/3600)
         self.dt = mkDT(np.arange(0, len(self.time)-1))
+        
         mkDTsplited = np.vectorize(lambda i: (self.time_splited[i+1] - self.time_splited[i]).total_seconds()/3600)
         self.dt_splited = mkDTsplited(np.arange(0, len(self.time_splited)-1))
+        
 
 
         if self.switch_Yini== 0:
             # @jit
             def model_simulation(par):
-                a = par[0]
+                a = np.exp(par[0])
                 b = par[1]
-                Lcw = par[2]
-                Lccw = par[3]
+                Lcw = np.exp(par[2])
+                Lccw = np.exp(par[3])
                 Ymd, _ = jaramillo21a(self.P_splited,
                                     self.dir_splited,
                                     self.dt_splited,
@@ -125,10 +126,10 @@ class cal_Jaramillo21a_2(object):
             self.model_sim = model_simulation
 
             def run_model(par):
-                a = par[0]
+                a = np.exp(par[0])
                 b = par[1]
-                Lcw = par[2]
-                Lccw = par[3]
+                Lcw = np.exp(par[2])
+                Lccw = np.exp(par[3])
                 Ymd, _ = jaramillo21a(self.P,
                                     self.dir,
                                     self.dt,
@@ -143,8 +144,8 @@ class cal_Jaramillo21a_2(object):
 
             # @jit
             def init_par(population_size):
-                log_lower_bounds = np.array([self.lb[0], self.lb[1], self.lb[2], self.lb[3]])
-                log_upper_bounds = np.array([self.ub[0], self.ub[1], self.ub[2], self.ub[3]])
+                log_lower_bounds = np.array([np.log(self.lb[0]), self.lb[1], np.log(self.lb[2]), np.log(self.lb[3])])
+                log_upper_bounds = np.array([np.log(self.ub[0]), self.ub[1], np.log(self.ub[2]), np.log(self.ub[3])])
                 population = np.zeros((population_size, 4))
                 for i in range(4):
                     population[:,i] = np.random.uniform(log_lower_bounds[i], log_upper_bounds[i], population_size)
@@ -155,10 +156,10 @@ class cal_Jaramillo21a_2(object):
 
         elif self.switch_Yini == 1:
             def model_simulation(par):
-                a = par[0]
+                a = np.exp(par[0])
                 b = par[1]
-                Lcw = par[2]
-                Lccw = par[3]
+                Lcw = np.exp(par[2])
+                Lccw = np.exp(par[3])
                 Yini = par[4]
                 Ymd, _ = jaramillo21a(self.P_splited,
                                     self.dir_splited,
@@ -174,10 +175,10 @@ class cal_Jaramillo21a_2(object):
             self.model_sim = model_simulation
 
             def run_model(par):
-                a = par[0]
+                a = np.exp(par[0])
                 b = par[1]
-                Lcw = par[2]
-                Lccw = par[3]
+                Lcw = np.exp(par[2])
+                Lccw = np.exp(par[3])
                 Yini = par[4]
                 Ymd, _ = jaramillo21a(self.P,
                                     self.dir,
@@ -192,8 +193,8 @@ class cal_Jaramillo21a_2(object):
             self.run_model = run_model
 
             def init_par(population_size):
-                log_lower_bounds = np.array([self.lb[0], self.lb[1], self.lb[2], self.lb[3], 0.75*np.min(self.Obs)])
-                log_upper_bounds = np.array([self.ub[0], self.ub[1], self.ub[2], self.ub[3], 1.25*np.max(self.Obs)])
+                log_lower_bounds = np.array([np.log(self.lb[0]), self.lb[1], np.log(self.lb[2]), np.log(self.lb[3]), 0.75*np.min(self.Obs)])
+                log_upper_bounds = np.array([np.log(self.ub[0]), self.ub[1], np.log(self.ub[2]), np.log(self.ub[3]), 1.25*np.max(self.Obs)])
                 population = np.zeros((population_size, 5))
                 for i in range(5):
                     population[:,i] = np.random.uniform(log_lower_bounds[i], log_upper_bounds[i], population_size)
