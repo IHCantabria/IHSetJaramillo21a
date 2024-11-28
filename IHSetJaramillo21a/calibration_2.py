@@ -90,7 +90,7 @@ class cal_Jaramillo21a_2(object):
         self.split_data()
 
         if self.switch_Yini == 0:
-            self.Yini = self.observations[self.idx_obs_splited[0]]
+            self.Yini = self.observations[0]
 
 
         mkIdx = np.vectorize(lambda t: np.argmin(np.abs(self.time - t)))
