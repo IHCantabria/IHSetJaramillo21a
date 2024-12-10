@@ -2,7 +2,7 @@ import numpy as np
 import xarray as xr
 import fast_optimization as fo
 import pandas as pd
-from .jaramillo21a import jaramillo21a
+from .jaramillo21a import jaramillo21a_njit
 import json
 from scipy.stats import circmean
 
@@ -61,7 +61,7 @@ class Jaramillo21a_run(object):
                 Lcw = par[2]
                 Lccw = par[3]
                 Yini = par[4]
-                Ymd, _ = jaramillo21a(self.P,
+                Ymd, _ = jaramillo21a_njit(self.P,
                                     self.dir,
                                     self.dt,
                                     a,
@@ -80,7 +80,7 @@ class Jaramillo21a_run(object):
                 b = par[1]
                 Lcw = par[2]
                 Lccw = par[3]
-                Ymd, _ = jaramillo21a(self.P,
+                Ymd, _ = jaramillo21a_njit(self.P,
                                     self.dir,
                                     self.dt,
                                     a,
