@@ -2,18 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='IHSetJaramillo21a',
-    version='1.2.6',
+    version='1.2.7',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
         'numpy',
         'xarray',
         'numba',
-        'datetime',
-        'spotpy',
         'scipy',
         'pandas',
-        'IHSetCalibration @ git+https://github.com/defreitasL/IHSetCalibration.git',
         'fast_optimization @ git+https://github.com/defreitasL/fast_optimization.git'
     ],
     author='Lucas de Freitas Pereira',

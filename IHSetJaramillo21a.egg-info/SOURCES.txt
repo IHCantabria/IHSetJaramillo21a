@@ -2,7 +2,6 @@ LICENSE
 README.md
 setup.py
 IHSetJaramillo21a/__init__.py
-IHSetJaramillo21a/calibration.py
 IHSetJaramillo21a/calibration_2.py
 IHSetJaramillo21a/direct_run.py
 IHSetJaramillo21a/jaramillo21a.py
