@@ -18,6 +18,10 @@ class cal_Jaramillo21a_2(object):
     def __init__(self, path):
 
         self.path = path
+        self.name = 'Jaramillo et al. (2021a)'
+        self.mode = 'calibration'
+        self.type = 'RT'
+
      
         data = xr.open_dataset(path)
         
@@ -203,4 +207,19 @@ class cal_Jaramillo21a_2(object):
         Calibrate the model.
         """
         self.solution, self.objectives, self.hist = self.calibr_cfg.calibrate(self)
-            
+
+        self.full_run = self.run_model(self.solution)
+
+        if self.switch_Yini == 0:
+            self.par_names = [r'$a$', r'$b$', r'$L_{cw}$', r'$L_{ccw}$']
+            self.par_values = self.solution.copy()
+            self.par_values[0] = np.exp(self.par_values[0])
+            self.par_values[2] = np.exp(self.par_values[2])
+            self.par_values[3] = np.exp(self.par_values[3])
+        elif self.switch_Yini == 1:
+            self.par_names = [r'$a$', r'$b$', r'$L_{cw}$', r'$L_{ccw}$', r'$Y_{i}$']
+            self.par_values = self.solution.copy()
+            self.par_values[0] = np.exp(self.par_values[0])
+            self.par_values[2] = np.exp(self.par_values[2])
+            self.par_values[3] = np.exp(self.par_values[3])
+            self.par_values[4] = np.exp(self.par_values[4])            
