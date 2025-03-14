@@ -26,6 +26,7 @@ class cal_Jaramillo21a_2(object):
         data = xr.open_dataset(path)
         
         cfg = json.loads(data.attrs['Jaramillo21a'])
+        self.cfg = cfg
 
         self.cal_alg = cfg['cal_alg']
         self.metrics = cfg['metrics']

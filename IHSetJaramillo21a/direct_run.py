@@ -25,6 +25,7 @@ class Jaramillo21a_run(object):
         data = xr.open_dataset(path)
         
         cfg = json.loads(data.attrs['run_Jaramillo21a'])
+        self.cfg = cfg
 
         self.switch_Yini = cfg['switch_Yini']
 
