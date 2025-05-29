@@ -3,4 +3,4 @@ xarray
 numba
 scipy
 pandas
-mathfast_optimization@ git+https://github.com/defreitasL/fast_optimization.git
+fast_optimization@ git+https://github.com/defreitasL/fast_optimization.git
