@@ -105,7 +105,7 @@ class Jaramillo21a_run(object):
         elif self.switch_Yini == 0:
             self.par_names = [r'a', r'b', r'L_{cw}', r'L_{ccw}', r'Y_{i}']
             self.par_values = par
-        self.calculate_metrics()
+        # self.calculate_metrics()
 
     def calculate_metrics(self):
         self.metrics_names = fo.backtot()[0]
