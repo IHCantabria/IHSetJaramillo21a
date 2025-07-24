@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='IHSetJaramillo21a',
-    version='1.3.9',
+    version='1.3.10',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -11,6 +11,7 @@ setup(
         'numba',
         'scipy',
         'pandas',
+        'IHSetUtils @ git+https://github.com/IHCantabria/IHSetUtils.git',
         'fast_optimization @ git+https://github.com/defreitasL/fast_optimization.git'
     ],
     author='Lucas de Freitas Pereira',
