@@ -155,7 +155,7 @@ class Jaramillo21a_run(CoastlineModel):
         self.P = self.hs ** 2 * self.tp
 
         if self.switch_Yini == 1:
-            self.Yini = self.Obs_splited[0]
+            self.Yini = self.Obs[0]
 
     
     def run_model(self, par: np.ndarray) -> np.ndarray:
