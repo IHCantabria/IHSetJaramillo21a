@@ -87,6 +87,5 @@ class cal_Jaramillo21a_2(CoastlineModel):
             self.par_names = [r'a', r'b', r'L_cw', r'L_ccw']
         elif self.switch_Yini == 1:
             self.par_names = [r'a', r'b', r'L_cw', r'L_ccw', r'Y_i']
-        self.par_values[0] = -np.exp(self.par_values[0])
-        for idx in [2, 3]:
+        for idx in [0, 2, 3]:
             self.par_values[idx] = np.exp(self.par_values[idx])

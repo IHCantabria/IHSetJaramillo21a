@@ -19,7 +19,7 @@ import numpy as np
 from numba import njit
 import math
 
-@njit(nopython=True, fastmath=True, cache=True)
+@njit(fastmath=True, cache=True)
 def jaramillo21a(P, theta, dt, a, b, Lcw, Lccw, alpha0):
     n = P.shape[0]
     alpha_eq = np.empty(n)
