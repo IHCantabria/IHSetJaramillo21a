@@ -48,7 +48,7 @@ class cal_Jaramillo21a_2(CoastlineModel):
         return pop, lowers, uppers
     
     def model_sim(self, par: np.ndarray) -> np.ndarray:
-        a = -np.exp(par[0]); b = par[1]
+        a = np.exp(par[0]); b = par[1]
         Lcw = np.exp(par[2]); Lccw = np.exp(par[3])
         if self.switch_Yini== 0:
             Yini = self.Yini
