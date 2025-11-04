@@ -4,3 +4,4 @@
 from .jaramillo21a import jaramillo21a
 from .calibration_2 import cal_Jaramillo21a_2
 from .direct_run import Jaramillo21a_run
+from .assimilation import assimilate_Jaramillo21a
