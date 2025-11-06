@@ -71,10 +71,16 @@ class assimilate_Jaramillo21a(CoastlineModel):
 
         i0, i1 = self.idx_obs_splited[t_idx-1], self.idx_obs_splited[t_idx]
 
-        # initial shoreline for this step
-        y0 = float(self.Yini) if (context is None or 'y_old' not in context) else float(context['y_old'])
+        if context is None or ('y_old' not in context):
+            y0 = float(self.Yini)   # first step starts from initial shoreline
+        else:
+            y0 = float(context['y_old'])
 
-        Ymd, _ = jaramillo21a(self.P_s[i0:i1],
+        if i0 >= i1:
+            return np.array([y0], dtype=float), {'y_old': y0}
+        else:
+
+            Ymd, _ = jaramillo21a(self.P_s[i0:i1],
                               self.dir_s[i0:i1],
                               self.dt_s[i0:i1],
                               a, b, Lcw, Lccw, y0)
@@ -99,24 +105,34 @@ class assimilate_Jaramillo21a(CoastlineModel):
         dir_seg = self.dir_s[i0:i1]
         dt_seg  = self.dt_s[i0:i1]
 
-        for j in range(N):
-            pj    = pop[j]
-            a     = np.exp(pj[0])
-            b     = pj[1]
-            Lcw   = np.exp(pj[2])
-            Lccw  = np.exp(pj[3])
+        if i0 >= i1:
+            for j in range(N):
+                y0 = float(self.Yini) if (contexts is None or contexts[j] is None
+                                        or 'y_old' not in contexts[j]) else float(contexts[j]['y_old'])
 
-            y0 = self.Yini if (contexts is None or contexts[j] is None or 'y_old' not in contexts[j]) \
-                 else float(contexts[j]['y_old'])
+                y_out[j]   = y0
+                new_ctx[j] = {'y_old': y0}
+            return y_out, new_ctx
+        else:
 
-            Ymd, _ = jaramillo21a(P_seg, dir_seg, dt_seg, a, b, Lcw, Lccw, y0)
-            y_last = float(Ymd[-1])
+            for j in range(N):
+                pj    = pop[j]
+                a     = np.exp(pj[0])
+                b     = pj[1]
+                Lcw   = np.exp(pj[2])
+                Lccw  = np.exp(pj[3])
 
-            y_out[j]   = y_last
-            new_ctx[j] = {'y_old': y_last}
+                y0 = self.Yini if (contexts is None or contexts[j] is None or 'y_old' not in contexts[j]) \
+                    else float(contexts[j]['y_old'])
 
-        # EnKF expects (N,) or (N,1) for scalar obs
-        return y_out, new_ctx
+                Ymd, _ = jaramillo21a(P_seg, dir_seg, dt_seg, a, b, Lcw, Lccw, y0)
+                y_last = float(Ymd[-1])
+
+                y_out[j]   = y_last
+                new_ctx[j] = {'y_old': y_last}
+
+            # EnKF expects (N,) or (N,1) for scalar obs
+            return y_out, new_ctx
 
     # -------------------------
     # Full forward model (for plotting after assimilation)
